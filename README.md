@@ -16,8 +16,8 @@ More about [cedr](https://github.com/antitim/cedr).
 ```js
 'use strict'
 
-const cedrlibrary = require('./cedr-library');
-const сedr = require('./gulp-cedr');
+const cedrlibrary = require('cedr-library');
+const сedr = require('gulp-cedr');
 const gulp = require('gulp');
 
 let library = {},
