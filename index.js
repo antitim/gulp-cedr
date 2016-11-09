@@ -8,7 +8,7 @@ module.exports = (options) => {
   let opts = Object.assign({}, options);
   let library = opts.library || {};
 
-  return through.obj((file, enc, cb) => {
+  return through.obj(function (file, enc, cb) {
     if (file.isNull()) {
       cb(null, file);
       return;
@@ -23,10 +23,9 @@ module.exports = (options) => {
       let html = cedr(eval(file.contents.toString()), library);
       file.contents = new Buffer(html);
       file.path = gutil.replaceExtension(file.path, '.html');
-
-      this.push(file);
     }
 
+    this.push(file);
     cb();
   });
 };
