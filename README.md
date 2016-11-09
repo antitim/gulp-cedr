@@ -16,46 +16,48 @@ More about [cedr](https://github.com/antitim/cedr).
 ```js
 'use strict'
 
-const cedrlibrary = require('cedr-library');
-const cedr = require('gulp-cedr');
-const gulp = require('gulp');
+const cedrlibrary	= require('cedr-library');
+const cedrDeps	= require('cedr-deps');
+const сedr			= require('gulp-cedr');
+const gulp 			= require('gulp');
 
 let library = {},
-  scripts = {},
-  styles = {};
+	scripts = {},
+	styles = {};
 
 gulp.task('library', (callback) => {
-  cedrlibrary(['libraries/lib1/'], function(mergedLibrary) {
-    library = mergedLibrary;
-    let deps = cedr.deps(true, mergedLibrary);
-    styles 	= deps.styleFiles;
-    scripts = deps.scriptFiles;
+	cedrlibrary(['libraries/antitim-lib/'], function(mergedLibrary) {
+		library = mergedLibrary;
+		let deps = cedrDeps(true, mergedLibrary);
+		styles 	= deps.style;
+		scripts = deps.script;
 
-    callback(null);
-  });
+		callback(null);
+	});
 });
 
 gulp.task('pages', ['library'], function() {
-  return gulp.src('pages/*.js')
-    .pipe(gulpCedr({
-      library: library
-    }))
-    .pipe(gulp.dest('./result/'));
+	return gulp.src('pages/*.js')
+		.pipe(сedr({
+			library: library
+		}))
+		.pipe(gulp.dest('./result/'));
 });
 
 gulp.task('css', ['library'], function() {
-  return gulp.src(styles)
-    .pipe(gulp.dest('./result/css/'))
+	return gulp.src(styles)
+		.pipe(gulp.dest('./result/css/'))
 });
 
 gulp.task('js', ['library'], function() {
-  return gulp.src(scripts)
-    .pipe(gulp.dest('./result/js/'))
+	return gulp.src(scripts)
+		.pipe(gulp.dest('./result/js/'))
 });
 
 gulp.task('default', ['css', 'js', 'pages'], function() {
-  console.log('Complete')
+	console.log('Complete')
 });
+
 ```
 ## Options
 

@@ -20,7 +20,7 @@ module.exports = (options) => {
     }
 
     if (file.isBuffer()) {
-      let html = cedr.render(eval(file.contents.toString()), library);
+      let html = cedr(eval(file.contents.toString()), library);
       file.contents = new Buffer(html);
       file.path = gutil.replaceExtension(file.path, '.html');
 
