@@ -1,6 +1,6 @@
 {
   "name": "gulp-cedr",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Gulp plugin for a cedr",
   "homepage": "",
   "author": {
@@ -29,7 +29,7 @@
     "mocha": "^3.1.2"
   },
   "dependencies": {
-    "cedr": "^0.1.2",
+    "cedr": "^0.1.3",
     "gulp-util": "^3.0.7",
     "through2": "^2.0.1"
   }
