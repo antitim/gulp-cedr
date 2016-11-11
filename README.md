@@ -13,12 +13,16 @@ $ npm install --save gulp-cedr
 
 More about [cedr](https://github.com/antitim/cedr).
 
+More about [cedr-library](https://github.com/antitim/cedr-library).
+
+More about [cedr-deps](https://github.com/antitim/cedr-deps).
+
 ```js
 'use strict'
 
 const cedrlibrary	= require('cedr-library');
-const cedrDeps	= require('cedr-deps');
-const сedr			= require('gulp-cedr');
+const cedrDeps		= require('cedr-deps');
+const cedr			= require('gulp-cedr');
 const gulp 			= require('gulp');
 
 let library = {},
