@@ -7,6 +7,7 @@ const cedr = require('cedr');
 module.exports = (options) => {
   let opts = Object.assign({}, options);
   let library = opts.library || {};
+  let evalContext = {};
 
   return through.obj(function (file, enc, cb) {
     if (file.isNull()) {
@@ -20,12 +21,16 @@ module.exports = (options) => {
     }
 
     if (file.isBuffer()) {
-      let html = cedr(eval(file.contents.toString()), library);
-      file.contents = new Buffer(html);
-      file.path = gutil.replaceExtension(file.path, '.html');
+      let pageJs = eval.call(evalContext, file.contents.toString());
+      let html = cedr(pageJs, library);
+
+      if (html !== '') {
+        file.contents = new Buffer(html);
+        file.path = gutil.replaceExtension(file.path, '.html');
+        this.push(file);
+      }
     }
 
-    this.push(file);
     cb();
   });
 };

@@ -63,6 +63,50 @@ gulp.task('default', ['css', 'js', 'pages'], function() {
 });
 
 ```
+
+### include and extend
+
+JS files containing pages run in one context while forming the html. 
+On this basis, to use include or extend, you can use the following construction:
+
+#### _helpers.js
+```js
+function layout(content_1) {
+	return {
+		block: 'page',
+		content: [
+			{ block: 'header' },
+			content_1,
+			{ block: 'footer' }
+		]
+	}
+}
+
+function menu() {
+	return {
+		block: 'menu',
+		content: [
+			{ 
+				block: 'menu',
+				element: 'item'
+			}
+		]
+	}
+}
+
+```
+
+#### page.js
+```js
+layout([
+	{
+		block: 'breadcrumbs'
+	},
+	menu()
+	...
+])
+```
+
 ## Options
 
 ### library
